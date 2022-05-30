@@ -22,7 +22,7 @@ public class BaseTest extends AbstractTest {
     }
 
     @Test
-    public void testOpenPage(){
+    public void testSearchRoute(){
         String pageLanguage = "English";
 
         SearchRouteStep searchRouteStep = new SearchRouteStep();
