@@ -1,15 +1,13 @@
 package com.bahn.ui.domain;
 
-import java.time.LocalDate;
-
 public class QuerySearch {
     private String origin;
     private String destination;
-    private LocalDate date;
+    private String date;
     private String time;
     private boolean departureStatus;
 
-    public QuerySearch(String origin, String destination, LocalDate date, String time, boolean departureStatus) {
+    public QuerySearch(String origin, String destination, String date, String time, boolean departureStatus) {
         this.origin = origin;
         this.destination = destination;
         this.date = date;
@@ -33,11 +31,11 @@ public class QuerySearch {
         this.destination = destination;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

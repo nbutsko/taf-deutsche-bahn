@@ -16,6 +16,8 @@
         <webdrivermanager>5.1.0</webdrivermanager>
         <log4j-api>2.17.2</log4j-api>
         <log4j-core>2.17.2</log4j-core>
+        <httpclient>4.5.13</httpclient>
+        <json>20211205</json>
         <maven.compiler.source>${jdk}</maven.compiler.source>
         <maven.compiler.target>${jdk}</maven.compiler.target>
     </properties>
@@ -51,6 +53,16 @@
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j-core}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json}</version>
         </dependency>
     </dependencies>
 

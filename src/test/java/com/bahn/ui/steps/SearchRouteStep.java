@@ -15,14 +15,19 @@ import java.util.List;
 
 public class SearchRouteStep {
 
+    HomePage homePage;
     SearchPage searchPage;
     SearchResultsPage searchResultsPage;
 
     public void openSearchPageWithSelectedLanguage(String language) {
-        searchPage = new HomePage().openPage()
+        homePage = new HomePage().openPage()
                 .clickButtonAcceptCookies()
                 .changeLanguage("English")
-                .clickButtonAcceptCookies()
+                .clickButtonAcceptCookies();
+    }
+
+    public void openSearchForm() {
+        searchPage = new HomePage().openPage()
                 .openSearchForm();
     }
 
@@ -57,21 +62,25 @@ public class SearchRouteStep {
         }
     }
 
-    public boolean isResultsMatchTheQuery(QuerySearch querySearch) {
+    public boolean isAllResultsContainTheQueryStations(QuerySearch querySearch) {
         logSearchResults();
-        boolean result1 = getListOfRouteCards().stream()
+        boolean isContainOrigin = getListOfRouteCards().stream()
                 .allMatch(routeCard -> routeCard.getFirstStation().contains(querySearch.getOrigin()));
-        boolean result2 = getListOfRouteCards().stream()
+        boolean isContainDestination = getListOfRouteCards().stream()
                 .allMatch(routeCard -> routeCard.getDestinationStation().contains(querySearch.getDestination()));
-        boolean result3 = false;
+        return isContainOrigin & isContainDestination;
+    }
+
+    public boolean isAllResultsMatchTheQueryTime(QuerySearch querySearch){
+        boolean result = false;
         LocalTime queryTime = LocalTime.parse(querySearch.getTime());
         if (querySearch.isDepartureStatus()) {
-            result3 = getListOfRouteCards().stream()
-                    .allMatch(routeCard -> LocalTime.parse(routeCard.getDepartureTime()).compareTo(queryTime) > 0);
+            result = getListOfRouteCards().stream()
+                    .allMatch(routeCard -> LocalTime.parse(routeCard.getDepartureTime()).compareTo(queryTime.minusMinutes(10)) > 0);
         } else {
-            result3 = getListOfRouteCards().stream()
-                    .allMatch(routeCard -> LocalTime.parse(routeCard.getArrivalTime()).compareTo(queryTime) < 0);
+            result = getListOfRouteCards().stream()
+                    .allMatch(routeCard -> LocalTime.parse(routeCard.getArrivalTime()).compareTo(queryTime.plusMinutes(10)) < 0);
         }
-        return result1 & result2 & result3;
+        return result;
     }
 }

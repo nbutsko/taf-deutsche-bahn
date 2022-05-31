@@ -1,5 +1,6 @@
 package com.bahn.ui.pageobjects;
 
+import com.bahn.utils.LocalDateTimeParser;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -43,14 +44,15 @@ public class SearchPage extends AbstractPage {
         return this;
     }
 
-    public SearchPage selectDate(LocalDate date) {
+    public SearchPage selectDate(String date) {
         buttonCalendar.click();
-        int countOfMonthsBetweenTodayAndDate = (int) ChronoUnit.MONTHS.between(LocalDate.now(), date);
+        LocalDate localDate = LocalDateTimeParser.parseStringToLocalDate(date);
+        int countOfMonthsBetweenTodayAndDate = (int) ChronoUnit.MONTHS.between(LocalDate.now(), localDate);
         for (int i = 0; i <= countOfMonthsBetweenTodayAndDate; i++) {
             buttonNextMonth.click();
         }
         for (WebElement dayOfSelectedMonth : daysOfMonth) {
-            if (dayOfSelectedMonth.getText().equals(String.valueOf(date.getDayOfMonth()))) {
+            if (dayOfSelectedMonth.getText().equals(String.valueOf(localDate.getDayOfMonth()))) {
                 dayOfSelectedMonth.click();
                 break;
             }

@@ -2,33 +2,36 @@ package com.bahn.ui.tests;
 
 import com.bahn.ui.domain.QuerySearch;
 import com.bahn.ui.steps.SearchRouteStep;
-import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.time.LocalDate;
+import static org.testng.Assert.assertTrue;
 
 public class BaseTest extends AbstractTest {
-    private QuerySearch querySearch;
 
-    @BeforeTest
-    public void setQueryParameters(){
-        String origin = "Aschaffenburg";
-        String destination = "Frankfurt";
-        LocalDate date = LocalDate.of(2022, 8, 20);
-        String time = "15:00";
-        boolean departureStatus = true;
-        querySearch = new QuerySearch(origin, destination, date, time, departureStatus);
+    SearchRouteStep searchRouteStep;
+
+    @DataProvider(name = "queryParameters")
+    public static Object[][] setQueryParameters() {
+        return new Object[][]{
+                {new QuerySearch("Aschaffenburg", "Flensburg", "12.10.2022", "12:00", true)},
+                {new QuerySearch("Frankfurt", "Bonn", "20.08.2022", "19:30", false)}};
     }
 
-    @Test
-    public void testSearchRoute(){
+    @BeforeTest
+    public void openPageAndAcceptCookies(){
         String pageLanguage = "English";
-
-        SearchRouteStep searchRouteStep = new SearchRouteStep();
+        searchRouteStep = new SearchRouteStep();
         searchRouteStep.openSearchPageWithSelectedLanguage(pageLanguage);
+    }
+
+    @Test(dataProvider = "queryParameters")
+    public void testSearchRoute(QuerySearch querySearch){
+        searchRouteStep.openSearchForm();
         searchRouteStep.fillAndSubmitSearchForm(querySearch);
 
-        Assert.assertTrue(searchRouteStep.isResultsMatchTheQuery(querySearch));
+        assertTrue(searchRouteStep.isAllResultsContainTheQueryStations(querySearch));
+        assertTrue(searchRouteStep.isAllResultsMatchTheQueryTime(querySearch));
     }
 }
