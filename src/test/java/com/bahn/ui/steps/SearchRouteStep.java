@@ -2,6 +2,7 @@ package com.bahn.ui.steps;
 
 import com.bahn.ui.domain.QuerySearch;
 import com.bahn.ui.domain.RouteCard;
+import com.bahn.ui.pageobjects.BahnComPage;
 import com.bahn.ui.pageobjects.HomePage;
 import com.bahn.ui.pageobjects.SearchPage;
 import com.bahn.ui.pageobjects.SearchResultsPage;
@@ -15,26 +16,28 @@ import java.util.List;
 
 public class SearchRouteStep {
 
-    HomePage homePage;
-    SearchPage searchPage;
-    SearchResultsPage searchResultsPage;
+    private HomePage homePage;
+    private SearchPage searchPage;
+    private SearchResultsPage searchResultsPage;
 
-    public void openSearchPageWithSelectedLanguage(String language) {
-        homePage = new HomePage().openPage()
+    public void openHomePageAndAcceptCookies(String language) {
+        homePage = new BahnComPage().openPage()
                 .clickButtonAcceptCookies()
-                .changeLanguage("English")
-                .clickButtonAcceptCookies();
+                .selectLanguage(language);
+        homePage.setHomePageUrl();
     }
 
-    public void openSearchForm() {
-        searchPage = new HomePage().openPage()
-                .openSearchForm();
+    public void openSearchForm(){
+        searchPage = homePage.openPage()
+                .openSearchForm()
+                .clickButtonAcceptCookiesAtSearchPage();
     }
 
     public void fillAndSubmitSearchForm(QuerySearch querySearch) {
-        searchResultsPage = searchPage.typeInputOrigin(querySearch.getOrigin())
+        searchResultsPage = searchPage
+                .typeInputOrigin(querySearch.getOrigin())
                 .typeInputDestination(querySearch.getDestination())
-                .selectDate(querySearch.getDate())
+                .typeDate(querySearch.getDate())
                 .typeTime(querySearch.getTime())
                 .selectDepartureOrArrival(querySearch.isDepartureStatus())
                 .clickButtonSearch();
@@ -71,7 +74,7 @@ public class SearchRouteStep {
         return isContainOrigin & isContainDestination;
     }
 
-    public boolean isAllResultsMatchTheQueryTime(QuerySearch querySearch){
+    public boolean isAllResultsMatchTheQueryTime(QuerySearch querySearch) {
         boolean result = false;
         LocalTime queryTime = LocalTime.parse(querySearch.getTime());
         if (querySearch.isDepartureStatus()) {

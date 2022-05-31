@@ -12,7 +12,7 @@ public class BaseTest extends AbstractTest {
 
     SearchRouteStep searchRouteStep;
 
-    @DataProvider(name = "queryParameters")
+    @DataProvider(name = "validQueryParameters")
     public static Object[][] setQueryParameters() {
         return new Object[][]{
                 {new QuerySearch("Aschaffenburg", "Flensburg", "12.10.2022", "12:00", true)},
@@ -21,12 +21,12 @@ public class BaseTest extends AbstractTest {
 
     @BeforeTest
     public void openPageAndAcceptCookies(){
-        String pageLanguage = "English";
+        String language = "English";
         searchRouteStep = new SearchRouteStep();
-        searchRouteStep.openSearchPageWithSelectedLanguage(pageLanguage);
+        searchRouteStep.openHomePageAndAcceptCookies(language);
     }
 
-    @Test(dataProvider = "queryParameters")
+    @Test(dataProvider = "validQueryParameters")
     public void testSearchRoute(QuerySearch querySearch){
         searchRouteStep.openSearchForm();
         searchRouteStep.fillAndSubmitSearchForm(querySearch);

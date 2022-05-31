@@ -6,9 +6,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AbstractPage {
 
-    protected final static String BASE_URL = "https://www.bahn.de/";
-    //protected final static String BASE_URL = "https://www.bahn.com/";
+    protected final static String BASE_URL = "https://www.bahn.com/";
     protected WebDriver driver;
+
+    public final static int WAIT_TIMEOUT_SECONDS = 10;
 
     public AbstractPage() {
         driver = DriverSingleton.getDriver();

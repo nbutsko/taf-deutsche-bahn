@@ -3,18 +3,12 @@ package com.bahn.ui.pageobjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class HomePage extends AbstractPage {
 
-    @FindBy(css = "button.js-accept-all-cookies")
-    private WebElement buttonAcceptCookies;
+    private String homePageUrl;
 
-    @FindBy(css = "button.language-selection__button")
-    private WebElement buttonChangeLanguage;
-
-    @FindBy(css = "li.language-selection__list-item")
-    private List<WebElement> languages;
+    @FindBy(css = "div.language-selection a")
+    private WebElement languageLink;
 
     @FindBy(css = "a.toggleTabBtn")
     private WebElement buttonOpenInformation;
@@ -23,24 +17,12 @@ public class HomePage extends AbstractPage {
     private WebElement buttonFurtherOptions;
 
     public HomePage openPage() {
-        driver.get(BASE_URL);
+        driver.get(homePageUrl);
         return this;
     }
 
-    public HomePage clickButtonAcceptCookies() {
-        buttonAcceptCookies.click();
-        return this;
-    }
-
-    public HomePage changeLanguage(String languageToSelect) {
-        buttonChangeLanguage.click();
-        for (WebElement language : languages) {
-            if (language.getText().contains(languageToSelect)){
-                language.click();
-                break;
-            }
-        }
-        return this;
+    public void setHomePageUrl(){
+        homePageUrl = languageLink.getAttribute("href");
     }
 
     public SearchPage openSearchForm(){
