@@ -34,7 +34,6 @@ public class BahnComPage extends AbstractPage{
         for (WebElement language : languages) {
             if (language.getText().contains(languageToSelect)) {
                 language.click();
-                UtilLogger.logger.info("Click " + language.getText());
                 break;
             }
         }
