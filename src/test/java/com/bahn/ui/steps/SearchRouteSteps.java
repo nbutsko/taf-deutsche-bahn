@@ -33,12 +33,13 @@ public class SearchRouteSteps extends SearchPage {
                 .clickButtonAcceptCookies()
                 .selectLanguage(language);
         homePage.setHomePageUrl();
+        homePage.openSearchForm()
+                .clickButtonAcceptCookiesAtSearchPage();
     }
 
     public void openSearchForm() {
         searchPage = homePage.openPage()
-                .openSearchForm()
-                .clickButtonAcceptCookiesAtSearchPage();
+                .openSearchForm();
     }
 
     public void fillAndSubmitSearchForm(QuerySearch querySearch) {

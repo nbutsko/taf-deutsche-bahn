@@ -38,15 +38,11 @@ public class SearchPage extends AbstractPage {
     public SearchPage clickButtonAcceptCookiesAtSearchPage() {
         String shadowRootLocator = "//body/div[1]";
         String buttonAcceptCookiesSelector = "button.js-accept-all-cookies";
-        try {
-            WebElement buttonAcceptCookies = driver.findElement(By.xpath(shadowRootLocator))
-                    .getShadowRoot()
-                    .findElement(By.cssSelector(buttonAcceptCookiesSelector));
-            buttonAcceptCookies.click();
-            UtilLogger.logger.info("Click buttonAcceptCookies");
-        } catch (NoSuchShadowRootException ignored) {
-            UtilLogger.logger.info("No shadow root elements.");
-        }
+        WebElement buttonAcceptCookies = driver.findElement(By.xpath(shadowRootLocator))
+                .getShadowRoot()
+                .findElement(By.cssSelector(buttonAcceptCookiesSelector));
+        buttonAcceptCookies.click();
+        UtilLogger.logger.info("Click buttonAcceptCookies");
         return this;
     }
 
@@ -93,17 +89,17 @@ public class SearchPage extends AbstractPage {
         return new SearchResultsPage();
     }
 
-    public String getOriginErrorMessage(){
+    public String getOriginErrorMessage() {
         UtilLogger.logger.info(originErrorMessage.getText());
         return originErrorMessage.getText();
     }
 
-    public String getDateErrorMessage(){
+    public String getDateErrorMessage() {
         UtilLogger.logger.info(dateErrorMessage.getText());
         return dateErrorMessage.getText();
     }
 
-    public String getTimeErrorMessage(){
+    public String getTimeErrorMessage() {
         UtilLogger.logger.info(timeErrorMessage.getText());
         return timeErrorMessage.getText();
     }

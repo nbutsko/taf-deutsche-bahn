@@ -9,7 +9,7 @@ public class AbstractPage {
     protected final static String BASE_URL = "https://www.bahn.com/";
     protected WebDriver driver;
 
-    public final static int WAIT_TIMEOUT_SECONDS = 10;
+    protected final static int WAIT_TIMEOUT_SECONDS = 20;
 
     public AbstractPage() {
         driver = DriverSingleton.getDriver();

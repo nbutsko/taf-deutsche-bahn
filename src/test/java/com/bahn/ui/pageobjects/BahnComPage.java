@@ -9,7 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class BahnComPage extends AbstractPage{
+public class BahnComPage extends AbstractPage {
+
+    private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS));
 
     @FindBy(css = "button.js-accept-all-cookies")
     private WebElement buttonAcceptCookies;
@@ -23,14 +25,13 @@ public class BahnComPage extends AbstractPage{
     }
 
     public BahnComPage clickButtonAcceptCookies() {
-        new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
-                .until(ExpectedConditions.visibilityOf(buttonAcceptCookies));
+        wait.until(ExpectedConditions.visibilityOf(buttonAcceptCookies));
         buttonAcceptCookies.click();
         UtilLogger.logger.info("Click buttonAcceptCookies");
         return this;
     }
 
-    public HomePage selectLanguage(String languageToSelect){
+    public HomePage selectLanguage(String languageToSelect) {
         for (WebElement language : languages) {
             if (language.getText().contains(languageToSelect)) {
                 UtilLogger.logger.info("Select Language " + language.getText());
