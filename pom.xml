@@ -10,7 +10,7 @@
 
     <properties>
         <jdk>8</jdk>
-        <testng>7.4.0</testng>
+        <testng>7.1.0</testng>
         <selenium-java>4.1.4</selenium-java>
         <selenium-chrome-driver>4.1.4</selenium-chrome-driver>
         <webdrivermanager>5.1.0</webdrivermanager>

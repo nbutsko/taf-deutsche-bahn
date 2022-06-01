@@ -26,13 +26,14 @@ public class BahnComPage extends AbstractPage{
         new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS))
                 .until(ExpectedConditions.visibilityOf(buttonAcceptCookies));
         buttonAcceptCookies.click();
-        UtilLogger.logger.info(buttonAcceptCookies);
+        UtilLogger.logger.info("Click buttonAcceptCookies");
         return this;
     }
 
     public HomePage selectLanguage(String languageToSelect){
         for (WebElement language : languages) {
             if (language.getText().contains(languageToSelect)) {
+                UtilLogger.logger.info("Select Language " + language.getText());
                 language.click();
                 break;
             }
