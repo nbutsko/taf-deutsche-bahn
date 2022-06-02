@@ -24,7 +24,7 @@ public class StationsTest extends AbstractTest {
         String url = "https://v5.db.transport.rest/stations";
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("query", station));
-        //httpClient = new CustomClient();
+        CustomClient client = httpClient;
         httpClient.sendGet(url, params);
 
         String body = httpClient.getBody();

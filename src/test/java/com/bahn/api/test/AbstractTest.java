@@ -3,20 +3,20 @@ package com.bahn.api.test;
 import com.bahn.api.client.CustomClient;
 import com.bahn.api.utils.JourneyUtils;
 import com.bahn.api.utils.StationUtils;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 public class AbstractTest {
-    protected CustomClient httpClient;
+    CustomClient httpClient;
     protected StationUtils stationUtils = new StationUtils();
     protected JourneyUtils journeyUtils = new JourneyUtils();
 
-    @BeforeTest
+    @BeforeClass
     public void getClient() {
         httpClient = new CustomClient();
     }
 
-    @AfterTest
+    @AfterClass
     public void closeClient() {
         httpClient.closeClient();
     }

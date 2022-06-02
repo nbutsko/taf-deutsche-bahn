@@ -4,10 +4,7 @@ import com.bahn.api.client.CustomClient;
 import com.bahn.api.entity.Journey;
 import com.bahn.api.entity.Station;
 import org.apache.http.NameValuePair;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +23,10 @@ public class JourneyTest extends AbstractTest {
                 new Journey("Wuppertal", "Hamburg-Bergedorf", "20.08.2022", "19:30:00", false)};
     }
 
-    @BeforeClass
+    @BeforeMethod
     public void getListOfStations(){
         String url = "https://v5.db.transport.rest/stations";
-        //httpClient = new CustomClient();
+        CustomClient client = httpClient;
         httpClient.sendGet(url, new ArrayList<>());
         stations = stationUtils.getListStations(httpClient.getBody());
     }

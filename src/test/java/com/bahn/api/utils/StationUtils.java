@@ -1,6 +1,8 @@
 package com.bahn.api.utils;
 
+import com.bahn.api.entity.Route;
 import com.bahn.api.entity.Station;
+import com.bahn.logger.UtilLogger;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -24,7 +26,14 @@ public class StationUtils {
         return result;
     }
 
+    private void logResponseResults(String responseBody) {
+        for (Station station : getListStations(responseBody)) {
+            UtilLogger.logger.info(station.toString());
+        }
+    }
+
     public boolean isResponseContainsStation(String stationName, String responseBody) {
+        logResponseResults(responseBody);
         return getListStations(responseBody).stream()
                 .map(Station::getName)
                 .allMatch(s -> s.contains(stationName));
