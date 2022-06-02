@@ -13,8 +13,8 @@ public class SearchDataProvider {
     @DataProvider(name = "validQueryParameters")
     public Object[] setValidQueryParameters() {
         return new Object[]{
-                new QuerySearch("Aschaffenburg", "Flensburg", "12.10.2022", "12:00", true),
-                new QuerySearch("Frankfurt", "Bonn", "20.08.2022", "19:30", false)};
+                new QuerySearch("Aschaffenburg Hbf", "Mannheim Hbf", "12.10.2022", "12:00", true),
+                new QuerySearch("Wuppertal Hbf", "Hamburg-Bergedorf", "20.08.2022", "19:30", false)};
     }
 
     @DataProvider(name = "emptyStationName")
@@ -49,6 +49,6 @@ public class SearchDataProvider {
 
     @DataProvider(name = "incorrectFormatTime")
     public Object[] setIncorrectFormatTime() {
-        return new Object[]{".", "7777", "hour"};
+        return new Object[]{".", "7777", "noon"};
     }
 }

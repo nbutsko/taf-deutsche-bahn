@@ -2,31 +2,17 @@ package com.bahn.ui.domain;
 
 public class RouteCard {
 
-    private String departureTime;
-    private String arrivalTime;
     private String firstStation;
     private String destinationStation;
+    private String date;
+    private String departureTime;
+    private String arrivalTime;
 
-    public RouteCard(String departureTime, String arrivalTime, String firstStation, String destinationStation) {
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
+    public RouteCard(String firstStation, String destinationStation, String date, String departureTime, String arrivalTime) {
         this.firstStation = firstStation;
         this.destinationStation = destinationStation;
-    }
-
-    public String getDepartureTime() {
-        return departureTime;
-    }
-
-    public void setDepartureTime(String departureTime) {
+        this.date = date;
         this.departureTime = departureTime;
-    }
-
-    public String getArrivalTime() {
-        return arrivalTime;
-    }
-
-    public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
@@ -46,13 +32,38 @@ public class RouteCard {
         this.destinationStation = destinationStation;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
     @Override
     public String toString() {
         return "RouteCard{" +
-                "depTime='" + departureTime + '\'' +
-                ", arrTime='" + arrivalTime + '\'' +
-                ", firstStation='" + firstStation + '\'' +
+                "firstStation='" + firstStation + '\'' +
                 ", destStation='" + destinationStation + '\'' +
+                ", date='" + date + '\'' +
+                ", depTime='" + departureTime + '\'' +
+                ", arrTime='" + arrivalTime + '\'' +
                 '}';
     }
 }

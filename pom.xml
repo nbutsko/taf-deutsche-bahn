@@ -9,68 +9,118 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <jdk>8</jdk>
-        <testng>7.1.0</testng>
-        <selenium-java>4.1.4</selenium-java>
-        <selenium-chrome-driver>4.1.4</selenium-chrome-driver>
-        <webdrivermanager>5.1.0</webdrivermanager>
-        <log4j-api>2.17.2</log4j-api>
-        <log4j-core>2.17.2</log4j-core>
-        <httpclient>4.5.13</httpclient>
-        <json>20211205</json>
-        <maven.compiler.source>${jdk}</maven.compiler.source>
-        <maven.compiler.target>${jdk}</maven.compiler.target>
+        <jdk.version>8</jdk.version>
+        <testng.version>7.1.0</testng.version>
+        <selenium-java.version>4.1.4</selenium-java.version>
+        <selenium-chrome-driver.version>4.1.4</selenium-chrome-driver.version>
+        <webdrivermanager.version>5.1.0</webdrivermanager.version>
+        <log4j-api.version>2.17.2</log4j-api.version>
+        <log4j-core.version>2.17.2</log4j-core.version>
+        <httpclient.version>4.5.13</httpclient.version>
+        <json.version>20211205</json.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <aspectj.version>1.8.10</aspectj.version>
+        <allure-testng.version>2.6.0</allure-testng.version>
+
+        <maven.compiler.source>${jdk.version}</maven.compiler.source>
+        <maven.compiler.target>${jdk.version}</maven.compiler.target>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>${testng}</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>${selenium-java}</version>
+            <version>${selenium-java.version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>${selenium-chrome-driver}</version>
+            <version>${selenium-chrome-driver.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager}</version>
+            <version>${webdrivermanager.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j-api}</version>
+            <version>${log4j-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>${log4j-core}</version>
+            <version>${log4j-core.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>${httpclient}</version>
+            <version>${httpclient.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>${json}</version>
+            <version>${json.version}</version>
         </dependency>
+        <!--dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-testng.version}</version>
+        </dependency-->
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                </configuration>
+            </plugin>
+
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"</argLine>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${project.build.directory}/allure-results</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <reportVersion>${allure-testng.version}</reportVersion>
+                </configuration>
+            </plugin-->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
         </plugins>
     </build>

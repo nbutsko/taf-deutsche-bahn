@@ -1,4 +1,4 @@
-package com.bahn.utils;
+package com.bahn.logger;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -6,7 +6,7 @@ import com.bahn.ui.pageobjects.BahnComPage;
 import com.bahn.ui.pageobjects.HomePage;
 import com.bahn.ui.pageobjects.SearchPage;
 import com.bahn.ui.pageobjects.SearchResultsPage;
-import com.bahn.utils.UtilLogger;
+import com.bahn.logger.UtilLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -57,13 +57,14 @@ public class SearchRouteSteps extends SearchPage {
         String arrTimeSelector = "div.timeArr";
         String firstStationSelector = "div.station.first";
         String destinationStationSelector = "div.stationDest";
+        String date = searchResultsPage.getDepartureDate();
         List<RouteCard> routeCardList = new ArrayList<>();
         for (WebElement routeCard : searchResultsPage.getSearchResultCards()) {
             String depTime = routeCard.findElement(By.cssSelector(depTimeSelector)).getText();
             String arrTime = routeCard.findElement(By.cssSelector(arrTimeSelector)).getText().substring(3);
             String firstStation = routeCard.findElement(By.cssSelector(firstStationSelector)).getText();
             String destinationStation = routeCard.findElement(By.cssSelector(destinationStationSelector)).getText();
-            routeCardList.add(new RouteCard(depTime, arrTime, firstStation, destinationStation));
+            routeCardList.add(new RouteCard(firstStation, destinationStation,date, depTime, arrTime));
         }
         return routeCardList;
     }
@@ -88,10 +89,10 @@ public class SearchRouteSteps extends SearchPage {
         LocalTime queryTime = LocalTime.parse(querySearch.getTime());
         if (querySearch.isDepartureStatus()) {
             result = getListOfRouteCards().stream()
-                    .allMatch(routeCard -> LocalTime.parse(routeCard.getDepartureTime()).compareTo(queryTime.minusMinutes(10)) > 0);
+                    .allMatch(routeCard -> LocalTime.parse(routeCard.getDepartureTime()).compareTo(queryTime.minusMinutes(20)) > 0);
         } else {
             result = getListOfRouteCards().stream()
-                    .allMatch(routeCard -> LocalTime.parse(routeCard.getArrivalTime()).compareTo(queryTime.plusMinutes(10)) < 0);
+                    .allMatch(routeCard -> LocalTime.parse(routeCard.getArrivalTime()).compareTo(queryTime.plusMinutes(20)) < 0);
         }
         return result;
     }
