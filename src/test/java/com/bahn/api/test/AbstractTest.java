@@ -7,7 +7,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class AbstractTest {
-    CustomClient httpClient;
+    public CustomClient httpClient;
     protected StationUtils stationUtils = new StationUtils();
     protected JourneyUtils journeyUtils = new JourneyUtils();
 

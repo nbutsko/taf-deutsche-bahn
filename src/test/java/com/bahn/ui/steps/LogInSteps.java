@@ -12,30 +12,28 @@ public class LogInSteps extends LogInPage {
     private LogInPage logInPage;
     private AuthorizedUserPage authorizedUserPage;
 
-    public void openHomePageAndAcceptCookies(String language) {
+    public final static String MESSAGE_SERVICE_UNAVAILABLE = "503 Service Unavailable";
+
+        public void openLoginForm(String pageLanguage) {
         homePage = new BahnComPage().openPage()
                 .clickButtonAcceptCookies()
-                .selectLanguage(language);
+                .selectLanguage(pageLanguage);
         homePage.setHomePageUrl();
-    }
-
-    public void openLoginForm() {
         logInPage = homePage.openPage()
                 .clickButtonLogin();
     }
 
-    public void fillLoginForm(User user){
-       logInPage = logInPage.typeUserName(user.getUsername())
-                .typePassword(user.getPassword());
-    }
-    public void clickLogin(){
-        authorizedUserPage = logInPage.clickButtonLogIn();
+    public void fillAndAcceptLoginForm(User user) {
+        authorizedUserPage = logInPage.typeUserName(user.getUsername())
+                .typePassword(user.getPassword())
+                .clickButtonLogIn();
     }
 
-    public String getUserName(){
-        System.out.println("Welcome " + authorizedUserPage.getTitleWelcomeUser());
-        System.out.println("UserUp " + authorizedUserPage.getUserLogin());
-        return authorizedUserPage.getTitleWelcomeUser();
+    public void waitAndManuallyEnterCaptcha(){
+        logInPage.waitAndClickCaptcha();
     }
 
+    public String getErrorMessage() {
+        return authorizedUserPage.getErrorMessage();
+    }
 }

@@ -4,18 +4,18 @@ import com.bahn.ui.domain.User;
 import com.bahn.ui.steps.LogInSteps;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+
 public class LogInTest extends AbstractTest {
 
     @Test(enabled = false)
-    public void testLogIn() throws InterruptedException {
+    public void testLogIn(){
         LogInSteps logInSteps = new LogInSteps();
-        logInSteps.openHomePageAndAcceptCookies("English");
-        logInSteps.openLoginForm();
-        logInSteps.fillLoginForm(new User("n.butsko92@gmail.com", "Mi123456"));
-        Thread.sleep(5000);
-        logInSteps.clickLogin();
-        Thread.sleep(15000);
-        logInSteps.getUserName();
-    }
+        logInSteps.openLoginForm("English");
 
+        logInSteps.fillAndAcceptLoginForm(new User("n.butsko92@gmail.com", "Mi123456"));
+        logInSteps.waitAndManuallyEnterCaptcha();
+
+        assertEquals(logInSteps.getErrorMessage(), LogInSteps.MESSAGE_SERVICE_UNAVAILABLE);
+    }
 }

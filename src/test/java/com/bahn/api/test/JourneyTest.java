@@ -1,6 +1,5 @@
 package com.bahn.api.test;
 
-import com.bahn.api.client.CustomClient;
 import com.bahn.api.entity.Journey;
 import com.bahn.api.entity.Station;
 import org.apache.http.NameValuePair;
@@ -26,7 +25,6 @@ public class JourneyTest extends AbstractTest {
     @BeforeMethod
     public void getListOfStations(){
         String url = "https://v5.db.transport.rest/stations";
-        CustomClient client = httpClient;
         httpClient.sendGet(url, new ArrayList<>());
         stations = stationUtils.getListStations(httpClient.getBody());
     }

@@ -6,16 +6,16 @@ import org.openqa.selenium.support.FindBy;
 
 public class AuthorizedUserPage extends AbstractPage{
 
-    @FindBy(tagName = "h2")
-    private WebElement titleWelcomeUser;
+    @FindBy(tagName = "h1")
+    private WebElement errorMessage;
 
     @FindBy(css = "div#userlogin")
     private WebElement userLogin;
 
-    public String getTitleWelcomeUser(){
-        String title = titleWelcomeUser.getText();
-        UtilLogger.logger.info(title);
-        return title;
+    public String getErrorMessage(){
+        String errorMessageText = errorMessage.getText();
+        UtilLogger.logger.info(errorMessageText);
+        return errorMessageText;
     }
 
     public String getUserLogin(){

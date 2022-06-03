@@ -1,6 +1,5 @@
 package com.bahn.api.test;
 
-import com.bahn.api.client.CustomClient;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.testng.annotations.DataProvider;
@@ -24,7 +23,6 @@ public class StationsTest extends AbstractTest {
         String url = "https://v5.db.transport.rest/stations";
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("query", station));
-        CustomClient client = httpClient;
         httpClient.sendGet(url, params);
 
         String body = httpClient.getBody();
