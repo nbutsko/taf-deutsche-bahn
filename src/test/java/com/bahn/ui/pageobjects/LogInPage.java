@@ -50,6 +50,7 @@ public class LogInPage extends AbstractPage {
     public void waitAndClickCaptcha(){
         driver.switchTo().frame(captchaFrame);
         wait.until(ExpectedConditions.visibilityOf(captcha));
+        //here a captcha is manually entered
         wait.until(ExpectedConditions.invisibilityOf(captcha));
         driver.switchTo().defaultContent();
     }

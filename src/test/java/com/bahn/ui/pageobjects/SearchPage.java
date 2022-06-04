@@ -41,6 +41,9 @@ public class SearchPage extends AbstractPage {
         WebElement buttonAcceptCookies = driver.findElement(By.xpath(shadowRootLocator))
                 .getShadowRoot()
                 .findElement(By.cssSelector(buttonAcceptCookiesSelector));
+        while (!buttonAcceptCookies.isDisplayed()) {
+            driver.navigate().refresh();
+        }
         buttonAcceptCookies.click();
         UtilLogger.logger.info("Click buttonAcceptCookies");
         return this;

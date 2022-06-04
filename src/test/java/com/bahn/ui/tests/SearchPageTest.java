@@ -2,6 +2,7 @@ package com.bahn.ui.tests;
 
 import com.bahn.ui.domain.QuerySearch;
 import com.bahn.ui.steps.SearchRouteSteps;
+import com.bahn.ui.testdata.SearchDataProvider;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -35,20 +36,15 @@ public class SearchPageTest extends AbstractTest {
 
     @Test(dataProvider = "emptyStationName", dataProviderClass = SearchDataProvider.class)
     public void testEmptyInputOriginStation(String stationName){
-        QuerySearch querySearch = new QuerySearch(stationName, SearchDataProvider.VALID_DESTINATION_NAME, SearchDataProvider.VALID_DATE, SearchDataProvider.VALID_TIME, true);
+        QuerySearch querySearch = new QuerySearch(
+                stationName,
+                SearchDataProvider.VALID_DESTINATION_NAME,
+                SearchDataProvider.VALID_DATE,
+                SearchDataProvider.VALID_TIME,
+                true);
         searchRouteSteps.fillAndSubmitSearchForm(querySearch);
 
         assertEquals(searchRouteSteps.getOriginErrorMessage(), searchRouteSteps.MESSAGE_EMPTY_INPUT_STATION);
-    }
-
-    @Test(dataProvider = "notInterpretableStationName", dataProviderClass = SearchDataProvider.class)
-    public void testInputOriginStationWithNotInterpretableData(String stationName){
-        QuerySearch querySearch = new QuerySearch(stationName, SearchDataProvider.VALID_DESTINATION_NAME, SearchDataProvider.VALID_DATE, SearchDataProvider.VALID_TIME, true);
-        String expectedMessage = String.format(searchRouteSteps.messageNotInterpretableInputStation, stationName);
-
-        searchRouteSteps.fillAndSubmitSearchForm(querySearch);
-
-        assertEquals(searchRouteSteps.getOriginErrorMessage(), expectedMessage);
     }
 
     @Test(dataProvider = "severalPossibleStationName", dataProviderClass = SearchDataProvider.class)
@@ -64,16 +60,6 @@ public class SearchPageTest extends AbstractTest {
     public void testInputDateWithInvalidData(String date){
         QuerySearch querySearch = new QuerySearch(SearchDataProvider.VALID_ORIGIN_NAME, SearchDataProvider.VALID_DESTINATION_NAME, date, SearchDataProvider.VALID_TIME, true);
         String expectedMessage = String.format(searchRouteSteps.messageInvalidInputDate, date);
-
-        searchRouteSteps.fillAndSubmitSearchForm(querySearch);
-
-        assertEquals(searchRouteSteps.getDateErrorMessage(), expectedMessage);
-    }
-
-    @Test(dataProvider = "incorrectFormatDate", dataProviderClass = SearchDataProvider.class)
-    public void testInputDateWithIncorrectFormatData(String date){
-        QuerySearch querySearch = new QuerySearch(SearchDataProvider.VALID_ORIGIN_NAME, SearchDataProvider.VALID_DESTINATION_NAME, date, SearchDataProvider.VALID_TIME, true);
-        String expectedMessage = String.format(searchRouteSteps.messageNotCorrectFormatInputDate, date);
 
         searchRouteSteps.fillAndSubmitSearchForm(querySearch);
 
