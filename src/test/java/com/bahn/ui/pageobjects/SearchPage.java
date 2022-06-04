@@ -9,6 +9,12 @@ import java.util.List;
 
 public class SearchPage extends AbstractPage {
 
+    public final String MESSAGE_EMPTY_INPUT_STATION = "Please fill in a stop/station.";
+    public final String MESSAGE_SEVERAL_POSSIBLE_INPUT_STATION = "Your input yielded several possible stops. Please select the desired stop.";
+    public final String MESSAGE_INPUT_DATE_INSIDE_THE_TIMETABLE = "Your input is not inside the timetable period between 12.12.21 and 10.12.22.";
+    public String messageInvalidInputDate = "Your input \"%s\" is an invalid date.";
+    public String messageNotCorrectFormatInputTime = "Your input \"%s\" is either not in the correct format, e.g. \"12:00\" or is an invalid timevalue.";
+
     @FindBy(className = "from")
     private WebElement inputOrigin;
 
@@ -37,12 +43,13 @@ public class SearchPage extends AbstractPage {
     private WebElement timeErrorMessage;
 
     public SearchPage clickButtonAcceptCookiesAtSearchPage() {
-        String shadowRootLocator = "//body/div[1]";
-        String buttonAcceptCookiesSelector = "button.js-accept-all-cookies";
+        String scriptToExecuteButtonAcceptCookies = "return document.querySelector('body>div').shadowRoot.querySelector('button.js-accept-all-cookies')";
+        while (!getWebDriverWait(driver).until(ExpectedConditions.elementToBeClickable(
+                (WebElement) ((JavascriptExecutor) driver).executeScript(scriptToExecuteButtonAcceptCookies))).isDisplayed()){
+            driver.navigate().refresh();
+        }
         getWebDriverWait(driver).until(ExpectedConditions.elementToBeClickable(
-                driver.findElement(By.xpath(shadowRootLocator))
-                        .getShadowRoot()
-                        .findElement(By.cssSelector(buttonAcceptCookiesSelector)))).click();
+                (WebElement) ((JavascriptExecutor) driver).executeScript(scriptToExecuteButtonAcceptCookies))).click();
         UtilLogger.logger.info("Click buttonAcceptCookies at SearchPage");
         return this;
     }
@@ -104,4 +111,6 @@ public class SearchPage extends AbstractPage {
         UtilLogger.logger.info(timeErrorMessage.getText());
         return timeErrorMessage.getText();
     }
+
+
 }

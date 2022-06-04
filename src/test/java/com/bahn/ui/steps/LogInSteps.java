@@ -8,14 +8,13 @@ import com.bahn.ui.pageobjects.LogInPage;
 
 public class LogInSteps extends LogInPage {
 
-    private HomePage homePage;
     private LogInPage logInPage;
     private AuthorizedUserPage authorizedUserPage;
 
     public final static String MESSAGE_SERVICE_UNAVAILABLE = "503 Service Unavailable";
 
-        public void openLoginForm(String pageLanguage) {
-        homePage = new BahnComPage().openPage()
+    public void openLoginForm(String pageLanguage) {
+        HomePage homePage = new BahnComPage().openPage()
                 .clickButtonAcceptCookies()
                 .selectLanguage(pageLanguage);
         homePage.setHomePageUrl();
@@ -23,13 +22,13 @@ public class LogInSteps extends LogInPage {
                 .clickButtonLogin();
     }
 
-    public void fillAndAcceptLoginForm(User user) {
+    public void fillAndSubmitLoginForm(User user) {
         authorizedUserPage = logInPage.typeUserName(user.getUsername())
                 .typePassword(user.getPassword())
                 .clickButtonLogIn();
     }
 
-    public void waitAndManuallyEnterCaptcha(){
+    public void waitAndManuallyEnterCaptcha() {
         logInPage.waitAndEnterCaptcha();
     }
 

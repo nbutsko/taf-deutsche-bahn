@@ -20,16 +20,10 @@ public class SearchRouteSteps extends SearchPage {
     private SearchPage searchPage;
     private SearchResultsPage searchResultsPage;
 
-    public final String MESSAGE_EMPTY_INPUT_STATION = "Please fill in a stop/station.";
-    public final String MESSAGE_SEVERAL_POSSIBLE_INPUT_STATION = "Your input yielded several possible stops. Please select the desired stop.";
-    public final String MESSAGE_INPUT_DATE_INSIDE_THE_TIMETABLE = "Your input is not inside the timetable period between 12.12.21 and 10.12.22.";
-    public String messageInvalidInputDate = "Your input \"%s\" is an invalid date.";
-    public String messageNotCorrectFormatInputTime = "Your input \"%s\" is either not in the correct format, e.g. \"12:00\" or is an invalid timevalue.";
-
-    public void openHomePageAndAcceptCookies(String language) {
+    public void openHomePageAndAcceptCookies(String pageLanguage) {
         homePage = new BahnComPage().openPage()
                 .clickButtonAcceptCookies()
-                .selectLanguage(language);
+                .selectLanguage(pageLanguage);
         homePage.setHomePageUrl();
         homePage.openSearchForm()
                 .clickButtonAcceptCookiesAtSearchPage();
@@ -93,5 +87,13 @@ public class SearchRouteSteps extends SearchPage {
                     .allMatch(routeCard -> LocalTime.parse(routeCard.getArrivalTime()).compareTo(queryTime.plusMinutes(20)) < 0);
         }
         return result;
+    }
+
+    public String getMessageInvalidInputDate(String inputDate){
+        return String.format(searchPage.messageInvalidInputDate, inputDate);
+    }
+
+    public String getMessageNotCorrectFormatInputTime(String inputTime){
+        return String.format(searchPage.messageNotCorrectFormatInputTime, inputTime);
     }
 }
