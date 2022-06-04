@@ -4,13 +4,8 @@ import com.bahn.logger.UtilLogger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class LogInPage extends AbstractPage {
-
-    private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS));
 
     @FindBy(css = "input#username")
     private WebElement inputUsername;
@@ -47,11 +42,11 @@ public class LogInPage extends AbstractPage {
         return new AuthorizedUserPage();
     }
 
-    public void waitAndClickCaptcha(){
+    public void waitAndEnterCaptcha(){
         driver.switchTo().frame(captchaFrame);
-        wait.until(ExpectedConditions.visibilityOf(captcha));
+        getWebDriverWait(driver).until(ExpectedConditions.visibilityOf(captcha));
         //here a captcha is manually entered
-        wait.until(ExpectedConditions.invisibilityOf(captcha));
+        getWebDriverWait(driver).until(ExpectedConditions.invisibilityOf(captcha));
         driver.switchTo().defaultContent();
     }
 }

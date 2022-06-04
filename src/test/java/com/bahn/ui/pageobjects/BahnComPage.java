@@ -4,14 +4,12 @@ import com.bahn.logger.UtilLogger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class BahnComPage extends AbstractPage {
 
-    private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS));
+    //private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS));
 
     @FindBy(css = "button.js-accept-all-cookies")
     private WebElement buttonAcceptCookies;
@@ -25,7 +23,7 @@ public class BahnComPage extends AbstractPage {
     }
 
     public BahnComPage clickButtonAcceptCookies() {
-        wait.until(ExpectedConditions.visibilityOf(buttonAcceptCookies));
+        getWebDriverWait(driver).until(ExpectedConditions.visibilityOf(buttonAcceptCookies));
         buttonAcceptCookies.click();
         UtilLogger.logger.info("Click buttonAcceptCookies");
         return this;

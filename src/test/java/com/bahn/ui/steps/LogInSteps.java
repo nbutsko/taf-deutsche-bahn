@@ -30,7 +30,7 @@ public class LogInSteps extends LogInPage {
     }
 
     public void waitAndManuallyEnterCaptcha(){
-        logInPage.waitAndClickCaptcha();
+        logInPage.waitAndEnterCaptcha();
     }
 
     public String getErrorMessage() {

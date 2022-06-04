@@ -1,6 +1,5 @@
 package com.bahn.ui.pageobjects;
 
-import com.bahn.logger.UtilLogger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -37,7 +36,6 @@ public class HomePage extends AbstractPage {
     public SearchPage openSearchForm(){
         buttonOpenInformation.click();
         buttonFurtherOptions.click();
-        UtilLogger.logger.info("Click buttonFurtherOptions");
         return new SearchPage();
     }
 }

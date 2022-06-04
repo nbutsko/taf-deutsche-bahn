@@ -3,6 +3,7 @@ package com.bahn.ui.pageobjects;
 import com.bahn.logger.UtilLogger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -38,14 +39,11 @@ public class SearchPage extends AbstractPage {
     public SearchPage clickButtonAcceptCookiesAtSearchPage() {
         String shadowRootLocator = "//body/div[1]";
         String buttonAcceptCookiesSelector = "button.js-accept-all-cookies";
-        WebElement buttonAcceptCookies = driver.findElement(By.xpath(shadowRootLocator))
-                .getShadowRoot()
-                .findElement(By.cssSelector(buttonAcceptCookiesSelector));
-        while (!buttonAcceptCookies.isDisplayed()) {
-            driver.navigate().refresh();
-        }
-        buttonAcceptCookies.click();
-        UtilLogger.logger.info("Click buttonAcceptCookies");
+        getWebDriverWait(driver).until(ExpectedConditions.elementToBeClickable(
+                driver.findElement(By.xpath(shadowRootLocator))
+                        .getShadowRoot()
+                        .findElement(By.cssSelector(buttonAcceptCookiesSelector)))).click();
+        UtilLogger.logger.info("Click buttonAcceptCookies at SearchPage");
         return this;
     }
 

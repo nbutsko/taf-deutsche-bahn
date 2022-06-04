@@ -3,6 +3,9 @@ package com.bahn.ui.pageobjects;
 import com.bahn.ui.driver.DriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class AbstractPage {
 
@@ -14,5 +17,9 @@ public class AbstractPage {
     public AbstractPage() {
         driver = DriverSingleton.getDriver();
         PageFactory.initElements(driver, this);
+    }
+
+    public WebDriverWait getWebDriverWait(WebDriver webDriver){
+        return new WebDriverWait(webDriver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS));
     }
 }
