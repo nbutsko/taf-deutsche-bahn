@@ -2,13 +2,19 @@ package com.bahn.ui.tests;
 
 import com.bahn.ui.domain.User;
 import com.bahn.ui.steps.LogInSteps;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class LogInTest extends AbstractTest {
 
-    @Test(groups = "Smoke", description = "Smoke test login form", enabled = false)
+    @Epic("UI")
+    @Feature("Login")
+    @Story("Smoke")
+    @Test(description = "Smoke - login form", enabled = false)
     public void testLogIn(){
         LogInSteps logInSteps = new LogInSteps();
         logInSteps.openLoginForm("English");

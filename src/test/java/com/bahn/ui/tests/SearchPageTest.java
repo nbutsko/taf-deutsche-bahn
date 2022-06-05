@@ -3,6 +3,9 @@ package com.bahn.ui.tests;
 import com.bahn.ui.domain.QuerySearch;
 import com.bahn.ui.steps.SearchRouteSteps;
 import com.bahn.ui.testdata.SearchDataProvider;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -25,10 +28,13 @@ public class SearchPageTest extends AbstractTest {
     @BeforeMethod
     public void openSearchForm() {
         searchRouteSteps.openSearchForm();
-        querySearch = SearchDataProvider.validQuery;
+        querySearch = new SearchDataProvider().getValidQuery();
     }
 
-    @Test(groups = "Smoke", description = "Smoke - search route", dataProvider = "validQueryParameters", dataProviderClass = SearchDataProvider.class)
+    @Epic("UI")
+    @Feature("Search route")
+    @Story("Smoke")
+    @Test(description = "Smoke - search route", dataProvider = "validQueryParameters", dataProviderClass = SearchDataProvider.class)
     public void testSearchRouteWithValidData(QuerySearch querySearch) {
         searchRouteSteps.fillAndSubmitSearchForm(querySearch);
 
@@ -36,7 +42,10 @@ public class SearchPageTest extends AbstractTest {
         assertTrue(searchRouteSteps.isAllResultsMatchTheQueryTime(querySearch));
     }
 
-    @Test(groups = "Regression", description = "Regression - search route with empty input station", dataProvider = "emptyStationName", dataProviderClass = SearchDataProvider.class)
+    @Epic("UI")
+    @Feature("Search route")
+    @Story("Regression")
+    @Test(description = "Regression - search route with empty input station", dataProvider = "emptyStationName", dataProviderClass = SearchDataProvider.class)
     public void testEmptyInputOriginStation(String stationName) {
         querySearch.setOrigin(stationName);
         searchRouteSteps.fillAndSubmitSearchForm(querySearch);
@@ -44,7 +53,10 @@ public class SearchPageTest extends AbstractTest {
         assertEquals(searchRouteSteps.getOriginErrorMessage(), searchRouteSteps.MESSAGE_EMPTY_INPUT_STATION);
     }
 
-    @Test(groups = "Regression", description = "Regression - search route with different versions of the station name", dataProvider = "severalPossibleStationName", dataProviderClass = SearchDataProvider.class)
+    @Epic("UI")
+    @Feature("Search route")
+    @Story("Regression")
+    @Test(description = "Regression - search route with different versions of the station name", dataProvider = "severalPossibleStationName", dataProviderClass = SearchDataProvider.class)
     public void testInputOriginStationWithSeveralPossibleData(String stationName) {
         querySearch.setOrigin(stationName);
         searchRouteSteps.fillAndSubmitSearchForm(querySearch);
@@ -52,7 +64,10 @@ public class SearchPageTest extends AbstractTest {
         assertEquals(searchRouteSteps.getOriginErrorMessage(), searchRouteSteps.MESSAGE_SEVERAL_POSSIBLE_INPUT_STATION);
     }
 
-    @Test(groups = "Regression", description = "Regression - search route with an invalid date", dataProvider = "invalidDate", dataProviderClass = SearchDataProvider.class)
+    @Epic("UI")
+    @Feature("Search route")
+    @Story("Regression")
+    @Test(description = "Regression - search route with an invalid date", dataProvider = "invalidDate", dataProviderClass = SearchDataProvider.class)
     public void testInputDateWithInvalidData(String date) {
         querySearch.setDate(date);
         searchRouteSteps.fillAndSubmitSearchForm(querySearch);
@@ -60,7 +75,10 @@ public class SearchPageTest extends AbstractTest {
         assertEquals(searchRouteSteps.getDateErrorMessage(), searchRouteSteps.getMessageInvalidInputDate(date));
     }
 
-    @Test(groups = "Regression", description = "Regression - search route with an off-schedule date", dataProvider = "insideTimetableDate", dataProviderClass = SearchDataProvider.class)
+    @Epic("UI")
+    @Feature("Search route")
+    @Story("Regression")
+    @Test(description = "Regression - search route with an off-schedule date", dataProvider = "insideTimetableDate", dataProviderClass = SearchDataProvider.class)
     public void testInputDateWithInsideTimetableData(String date) {
         querySearch.setDate(date);
         searchRouteSteps.fillAndSubmitSearchForm(querySearch);
@@ -68,7 +86,10 @@ public class SearchPageTest extends AbstractTest {
         assertEquals(searchRouteSteps.getDateErrorMessage(), searchRouteSteps.MESSAGE_INPUT_DATE_INSIDE_THE_TIMETABLE);
     }
 
-    @Test(groups = "Regression", description = "Regression - search route with an incorrect format time", dataProvider = "incorrectFormatTime", dataProviderClass = SearchDataProvider.class)
+    @Epic("UI")
+    @Feature("Search route")
+    @Story("Regression")
+    @Test(description = "Regression - search route with an incorrect format time", dataProvider = "incorrectFormatTime", dataProviderClass = SearchDataProvider.class)
     public void testInputTimeWithIncorrectFormatData(String time) {
         querySearch.setTime(time);
         searchRouteSteps.fillAndSubmitSearchForm(querySearch);

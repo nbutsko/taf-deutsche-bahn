@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke suite" verbose="1">
+    <test name="Smoke">
+        <classes>
+            <class name="com.bahn.api.test.JourneyTest"/>
+            <class name="com.bahn.api.test.StationsTest"/>
+            <class name="com.bahn.ui.tests.LogInTest"/>
+            <class name="com.bahn.ui.tests.SearchPageTest">
+                <methods>
+                    <include name="testSearchRouteWithValidData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

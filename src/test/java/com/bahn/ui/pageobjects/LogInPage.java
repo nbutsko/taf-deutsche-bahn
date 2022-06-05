@@ -1,6 +1,7 @@
 package com.bahn.ui.pageobjects;
 
 import com.bahn.logger.UtilLogger;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,6 +23,7 @@ public class LogInPage extends AbstractPage {
     @FindBy(css = "div.challenge")
     private WebElement captcha;
 
+    @Step("Type username {0}")
     public LogInPage typeUserName(String username) {
         inputUsername.clear();
         inputUsername.sendKeys(username);
@@ -29,6 +31,7 @@ public class LogInPage extends AbstractPage {
         return this;
     }
 
+    @Step("Type password {0}")
     public LogInPage typePassword(String password) {
         inputPassword.clear();
         inputPassword.sendKeys(password);
@@ -36,9 +39,10 @@ public class LogInPage extends AbstractPage {
         return this;
     }
 
+    @Step("Click button Login")
     public AuthorizedUserPage clickButtonLogIn() {
         buttonLogIn.click();
-        UtilLogger.logger.info("Click buttonLogIn");
+        UtilLogger.logger.info("Click button LogIn");
         return new AuthorizedUserPage();
     }
 

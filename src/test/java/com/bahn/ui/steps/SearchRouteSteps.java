@@ -37,7 +37,7 @@ public class SearchRouteSteps extends SearchPage {
                 .openSearchForm();
     }
 
-    @Step("Fill out the route search form with the {0}")
+    @Step("Fill out the route search form")
     public void fillAndSubmitSearchForm(QuerySearch querySearch) {
         searchResultsPage = searchPage
                 .typeInputOrigin(querySearch.getOrigin())

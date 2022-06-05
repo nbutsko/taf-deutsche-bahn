@@ -4,6 +4,7 @@ import com.bahn.api.entity.Journey;
 import com.bahn.api.entity.Route;
 import com.bahn.api.entity.Station;
 import com.bahn.logger.UtilLogger;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -63,9 +64,19 @@ public class JourneyUtils {
         }
     }
 
+    @Attachment(value = "Journeys list", type = "application/json", fileExtension = ".txt")
+    public String getJourneysListAttachment(String responseBody){
+        StringBuilder result = new StringBuilder();
+        for (Route route : getListJourneys(responseBody)) {
+            result.append(route.toString()).append("\n");
+        }
+        return String.valueOf(result);
+    }
+
     @Step("Is response contains {0}")
     public boolean isResponseContainJourneyStations(Journey journey, String responseBody) {
         logResponseResults(responseBody);
+        getJourneysListAttachment(responseBody);
         boolean isContainFrom = getListJourneys(responseBody).stream()
                 .allMatch(route -> route.getFirstStation().contains(journey.getFrom()));
         boolean isContainTo = getListJourneys(responseBody).stream()

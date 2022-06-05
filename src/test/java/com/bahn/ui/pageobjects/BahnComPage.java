@@ -9,8 +9,6 @@ import java.util.List;
 
 public class BahnComPage extends AbstractPage {
 
-    //private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT_SECONDS));
-
     @FindBy(css = "button.js-accept-all-cookies")
     private WebElement buttonAcceptCookies;
 

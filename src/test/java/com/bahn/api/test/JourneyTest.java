@@ -2,6 +2,9 @@ package com.bahn.api.test;
 
 import com.bahn.api.entity.Journey;
 import com.bahn.api.entity.Station;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.apache.http.NameValuePair;
 import org.testng.annotations.*;
 
@@ -29,7 +32,10 @@ public class JourneyTest extends AbstractTest {
         stations = stationUtils.getListStations(httpClient.getBody());
     }
 
-    @Test(groups = "Smoke", description = "Test API GET journey with parameters", dataProvider = "journeys")
+    @Epic("API")
+    @Feature("GET Journeys")
+    @Story("Smoke")
+    @Test(description = "Test API GET journey with parameters", dataProvider = "journeys")
     public void testGetJourneysRequest(Journey journey) {
         String url = "https://v5.db.transport.rest/journeys";
         List<NameValuePair> params = journeyUtils.getJourneyParameters(journey, stations);

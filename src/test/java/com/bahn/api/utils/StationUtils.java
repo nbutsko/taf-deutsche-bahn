@@ -1,8 +1,9 @@
 package com.bahn.api.utils;
 
-import com.bahn.api.entity.Route;
 import com.bahn.api.entity.Station;
 import com.bahn.logger.UtilLogger;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -32,7 +33,18 @@ public class StationUtils {
         }
     }
 
+    @Attachment(value = "Stations list", type = "application/json", fileExtension = ".txt")
+    public String getStationListAttachment(String responseBody){
+        StringBuilder result = new StringBuilder();
+        for (Station station : getListStations(responseBody)) {
+            result.append(station.toString()).append("\n");
+        }
+        return String.valueOf(result);
+    }
+
+    @Step("Is response contains {0}")
     public boolean isResponseContainsStation(String stationName, String responseBody) {
+        getStationListAttachment(responseBody);
         logResponseResults(responseBody);
         return getListStations(responseBody).stream()
                 .map(Station::getName)

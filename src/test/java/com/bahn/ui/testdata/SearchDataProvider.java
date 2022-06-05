@@ -9,7 +9,11 @@ public class SearchDataProvider {
     private static final String VALID_DESTINATION_NAME = "Frankfurt";
     private static final String VALID_DATE = "08.10.2022";
     private static final String VALID_TIME = "15:00";
-    public static QuerySearch validQuery = new QuerySearch(VALID_ORIGIN_NAME,VALID_DESTINATION_NAME,VALID_DATE,VALID_TIME, true);
+    public QuerySearch validQuery = new QuerySearch(VALID_ORIGIN_NAME, VALID_DESTINATION_NAME, VALID_DATE, VALID_TIME, true);
+
+    public QuerySearch getValidQuery() {
+        return validQuery;
+    }
 
     @DataProvider(name = "validQueryParameters")
     public Object[] setValidQueryParameters() {
@@ -30,7 +34,7 @@ public class SearchDataProvider {
 
     @DataProvider(name = "invalidDate")
     public Object[] setInvalidDate() {
-        return new Object[]{"12 June 2022", "3.Nov.22", "00/00/00"};
+        return new Object[]{"12 June 2022", "3.Nov.22"};
     }
 
     @DataProvider(name = "insideTimetableDate")
@@ -40,6 +44,6 @@ public class SearchDataProvider {
 
     @DataProvider(name = "incorrectFormatTime")
     public Object[] setIncorrectFormatTime() {
-        return new Object[]{".", "7777", "noon"};
+        return new Object[]{".", "7777"};
     }
 }

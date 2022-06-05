@@ -1,5 +1,8 @@
 package com.bahn.api.test;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.testng.annotations.DataProvider;
@@ -15,10 +18,13 @@ public class StationsTest extends AbstractTest {
 
     @DataProvider(name = "validStations")
     public Object[] setValidStationName() {
-        return new Object[]{"Frankfurt", "Bonn"};
+        return new Object[]{"Stuttgart", "Bonn"};
     }
 
-    @Test(groups = "Smoke", description = "Test API GET station by name", dataProvider = "validStations")
+    @Epic("API")
+    @Feature("GET Stations")
+    @Story("Smoke")
+    @Test(description = "Test API GET station by name", dataProvider = "validStations")
     public void testGetStationsRequest(String station) {
         String url = "https://v5.db.transport.rest/stations";
         List<NameValuePair> params = new ArrayList<>();

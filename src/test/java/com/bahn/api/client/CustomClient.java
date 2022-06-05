@@ -45,7 +45,6 @@ public class CustomClient {
     public String getBody() {
         try {
             body = EntityUtils.toString(response.getEntity());
-            //UtilLogger.logger.info(body);
         } catch (IOException e) {
             UtilLogger.logger.warn(e.getMessage());
         }
