@@ -54,4 +54,15 @@ public class QuerySearch {
     public void setDepartureStatus(boolean departureStatus) {
         this.departureStatus = departureStatus;
     }
+
+    @Override
+    public String toString() {
+        return "QuerySearch{" +
+                "origin='" + origin + '\'' +
+                ", destination='" + destination + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", departureStatus=" + departureStatus +
+                '}';
+    }
 }

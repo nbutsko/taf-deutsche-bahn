@@ -7,6 +7,7 @@ import com.bahn.ui.pageobjects.HomePage;
 import com.bahn.ui.pageobjects.SearchPage;
 import com.bahn.ui.pageobjects.SearchResultsPage;
 import com.bahn.logger.UtilLogger;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -20,6 +21,7 @@ public class SearchRouteSteps extends SearchPage {
     private SearchPage searchPage;
     private SearchResultsPage searchResultsPage;
 
+    @Step("Open home page in {0} and accept all cookies")
     public void openHomePageAndAcceptCookies(String pageLanguage) {
         homePage = new BahnComPage().openPage()
                 .clickButtonAcceptCookies()
@@ -29,11 +31,13 @@ public class SearchRouteSteps extends SearchPage {
                 .clickButtonAcceptCookiesAtSearchPage();
     }
 
+    @Step("Open search route form")
     public void openSearchForm() {
         searchPage = homePage.openPage()
                 .openSearchForm();
     }
 
+    @Step("Fill out the route search form with the {0}")
     public void fillAndSubmitSearchForm(QuerySearch querySearch) {
         searchResultsPage = searchPage
                 .typeInputOrigin(querySearch.getOrigin())
@@ -67,6 +71,7 @@ public class SearchRouteSteps extends SearchPage {
         }
     }
 
+    @Step("Is route results contain stations {querySearch.origin}, {querySearch.destination}")
     public boolean isAllResultsContainTheQueryStations(QuerySearch querySearch) {
         logSearchResults();
         boolean isContainOrigin = getListOfRouteCards().stream()
@@ -76,6 +81,7 @@ public class SearchRouteSteps extends SearchPage {
         return isContainOrigin & isContainDestination;
     }
 
+    @Step("Is route results match {querySearch.time} {querySearch.date}, departureStatus = {querySearch.departureStatus}")
     public boolean isAllResultsMatchTheQueryTime(QuerySearch querySearch) {
         boolean result = false;
         LocalTime queryTime = LocalTime.parse(querySearch.getTime());

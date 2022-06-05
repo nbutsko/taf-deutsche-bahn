@@ -18,7 +18,7 @@ public class StationsTest extends AbstractTest {
         return new Object[]{"Frankfurt", "Bonn"};
     }
 
-    @Test(dataProvider = "validStations")
+    @Test(groups = "Smoke", description = "Test API GET station by name", dataProvider = "validStations")
     public void testGetStationsRequest(String station) {
         String url = "https://v5.db.transport.rest/stations";
         List<NameValuePair> params = new ArrayList<>();

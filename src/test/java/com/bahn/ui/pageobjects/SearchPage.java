@@ -1,6 +1,7 @@
 package com.bahn.ui.pageobjects;
 
 import com.bahn.logger.UtilLogger;
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -43,41 +44,45 @@ public class SearchPage extends AbstractPage {
     private WebElement timeErrorMessage;
 
     public SearchPage clickButtonAcceptCookiesAtSearchPage() {
-        String scriptToExecuteButtonAcceptCookies = "return document.querySelector('body>div').shadowRoot.querySelector('button.js-accept-all-cookies')";
-        while (!getWebDriverWait(driver).until(ExpectedConditions.elementToBeClickable(
-                (WebElement) ((JavascriptExecutor) driver).executeScript(scriptToExecuteButtonAcceptCookies))).isDisplayed()){
-            driver.navigate().refresh();
-        }
-        getWebDriverWait(driver).until(ExpectedConditions.elementToBeClickable(
-                (WebElement) ((JavascriptExecutor) driver).executeScript(scriptToExecuteButtonAcceptCookies))).click();
+        String shadowRootLocator = "//body/div[1]";
+        String buttonAcceptCookiesSelector = "button.js-accept-all-cookies";
+        WebElement buttonAcceptCookies = driver.findElement(By.xpath(shadowRootLocator))
+                .getShadowRoot()
+                .findElement(By.cssSelector(buttonAcceptCookiesSelector));
+        buttonAcceptCookies.click();
         UtilLogger.logger.info("Click buttonAcceptCookies at SearchPage");
         return this;
     }
 
+    @Step("Type origin station {0}")
     public SearchPage typeInputOrigin(String origin) {
         inputOrigin.clear();
         inputOrigin.sendKeys(origin);
         return this;
     }
 
+    @Step("Type destination station {0}")
     public SearchPage typeInputDestination(String destination) {
         inputDestination.clear();
         inputDestination.sendKeys(destination);
         return this;
     }
 
+    @Step("Type date {0}")
     public SearchPage typeDate(String date) {
         inputDate.clear();
         inputDate.sendKeys(date);
         return this;
     }
 
+    @Step("Type time {0}")
     public SearchPage typeTime(String time) {
         inputTime.clear();
         inputTime.sendKeys(time);
         return this;
     }
 
+    @Step("Departure status = {0}")
     public SearchPage selectDepartureOrArrival(boolean departureStatus) {
         if (departureStatus) {
             if (!radiobuttonDepartureArrival.get(0).isSelected()) {
@@ -91,6 +96,7 @@ public class SearchPage extends AbstractPage {
         return this;
     }
 
+    @Step("Submit search route form")
     public SearchResultsPage clickButtonSearch() {
         buttonSearch.click();
         UtilLogger.logger.info("Click buttonSearch");

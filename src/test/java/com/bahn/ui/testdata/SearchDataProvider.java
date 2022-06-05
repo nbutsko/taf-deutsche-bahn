@@ -5,10 +5,11 @@ import org.testng.annotations.DataProvider;
 
 public class SearchDataProvider {
 
-    public static final String VALID_ORIGIN_NAME = "Bonn";
-    public static final String VALID_DESTINATION_NAME = "Frankfurt";
-    public static final String VALID_DATE = "08.10.2022";
-    public static final String VALID_TIME = "15:00";
+    private static final String VALID_ORIGIN_NAME = "Bonn";
+    private static final String VALID_DESTINATION_NAME = "Frankfurt";
+    private static final String VALID_DATE = "08.10.2022";
+    private static final String VALID_TIME = "15:00";
+    public static QuerySearch validQuery = new QuerySearch(VALID_ORIGIN_NAME,VALID_DESTINATION_NAME,VALID_DATE,VALID_TIME, true);
 
     @DataProvider(name = "validQueryParameters")
     public Object[] setValidQueryParameters() {

@@ -29,7 +29,7 @@ public class JourneyTest extends AbstractTest {
         stations = stationUtils.getListStations(httpClient.getBody());
     }
 
-    @Test(dataProvider = "journeys")
+    @Test(groups = "Smoke", description = "Test API GET journey with parameters", dataProvider = "journeys")
     public void testGetJourneysRequest(Journey journey) {
         String url = "https://v5.db.transport.rest/journeys";
         List<NameValuePair> params = journeyUtils.getJourneyParameters(journey, stations);

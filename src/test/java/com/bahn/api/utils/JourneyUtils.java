@@ -4,6 +4,7 @@ import com.bahn.api.entity.Journey;
 import com.bahn.api.entity.Route;
 import com.bahn.api.entity.Station;
 import com.bahn.logger.UtilLogger;
+import io.qameta.allure.Step;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -62,6 +63,7 @@ public class JourneyUtils {
         }
     }
 
+    @Step("Is response contains {0}")
     public boolean isResponseContainJourneyStations(Journey journey, String responseBody) {
         logResponseResults(responseBody);
         boolean isContainFrom = getListJourneys(responseBody).stream()

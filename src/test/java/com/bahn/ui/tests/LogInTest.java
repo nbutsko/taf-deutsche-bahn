@@ -8,7 +8,7 @@ import static org.testng.Assert.assertEquals;
 
 public class LogInTest extends AbstractTest {
 
-    @Test(enabled = false)
+    @Test(groups = "Smoke", description = "Smoke test login form", enabled = false)
     public void testLogIn(){
         LogInSteps logInSteps = new LogInSteps();
         logInSteps.openLoginForm("English");

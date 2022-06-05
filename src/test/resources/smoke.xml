@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Tutorialspoint Test">
+    <test name="Smoke tests">
+        <groups>
+            <run>
+                <include name="Smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.bahn.ui.tests.SearchPageTest"/>
+            <class name="com.bahn.ui.tests.LogInTest"/>
+            <class name="com.bahn.api.test.JourneyTest"/>
+            <class name="com.bahn.api.test.StationsTest"/>
+        </classes>
+    </test>
+</suite>
