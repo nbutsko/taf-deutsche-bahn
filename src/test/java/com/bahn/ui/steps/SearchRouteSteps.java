@@ -46,6 +46,7 @@ public class SearchRouteSteps extends SearchPage {
                 .typeTime(querySearch.getTime())
                 .selectDepartureOrArrival(querySearch.isDepartureStatus())
                 .clickButtonSearch();
+        UtilLogger.logger.info(querySearch);
     }
 
     private List<RouteCard> getListOfRouteCards() {

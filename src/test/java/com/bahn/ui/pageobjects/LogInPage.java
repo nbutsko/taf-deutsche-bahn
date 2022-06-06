@@ -27,7 +27,6 @@ public class LogInPage extends AbstractPage {
     public LogInPage typeUserName(String username) {
         inputUsername.clear();
         inputUsername.sendKeys(username);
-        UtilLogger.logger.info("Type username " + username);
         return this;
     }
 
@@ -35,14 +34,12 @@ public class LogInPage extends AbstractPage {
     public LogInPage typePassword(String password) {
         inputPassword.clear();
         inputPassword.sendKeys(password);
-        UtilLogger.logger.info("Type password " + password);
         return this;
     }
 
     @Step("Click button Login")
     public AuthorizedUserPage clickButtonLogIn() {
         buttonLogIn.click();
-        UtilLogger.logger.info("Click button LogIn");
         return new AuthorizedUserPage();
     }
 

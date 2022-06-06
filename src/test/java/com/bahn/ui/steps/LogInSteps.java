@@ -1,5 +1,6 @@
 package com.bahn.ui.steps;
 
+import com.bahn.logger.UtilLogger;
 import com.bahn.ui.domain.User;
 import com.bahn.ui.pageobjects.AuthorizedUserPage;
 import com.bahn.ui.pageobjects.BahnComPage;
@@ -15,7 +16,7 @@ public class LogInSteps extends LogInPage {
     public final static String MESSAGE_SERVICE_UNAVAILABLE = "503 Service Unavailable";
 
     @Step("Open home page in {0}, accept all cookies and open login form")
-    public void openLoginForm(String pageLanguage) {
+    public void openLoginForm(String pageLanguage)  {
         HomePage homePage = new BahnComPage().openPage()
                 .clickButtonAcceptCookies()
                 .selectLanguage(pageLanguage);
@@ -25,15 +26,17 @@ public class LogInSteps extends LogInPage {
     }
 
     @Step("Fill out and submit login form")
-    public void fillAndSubmitLoginForm(User user) {
+    public void fillAndSubmitLoginForm(User user){
         authorizedUserPage = logInPage.typeUserName(user.getUsername())
                 .typePassword(user.getPassword())
                 .clickButtonLogIn();
+        UtilLogger.logger.info(user);
     }
 
     @Step("Manually enter the captcha")
-    public void waitAndManuallyEnterCaptcha() {
+    public void waitAndManuallyEnterCaptcha(){
         logInPage.waitAndEnterCaptcha();
+
     }
 
     @Step("Get error message")

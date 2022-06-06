@@ -23,7 +23,6 @@ public class BahnComPage extends AbstractPage {
     public BahnComPage clickButtonAcceptCookies() {
         getWebDriverWait(driver).until(ExpectedConditions.visibilityOf(buttonAcceptCookies));
         buttonAcceptCookies.click();
-        UtilLogger.logger.info("Click buttonAcceptCookies");
         return this;
     }
 

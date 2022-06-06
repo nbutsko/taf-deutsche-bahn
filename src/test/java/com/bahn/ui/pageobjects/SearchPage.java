@@ -50,7 +50,6 @@ public class SearchPage extends AbstractPage {
                 driver.findElement(By.xpath(shadowRootLocator))
                         .getShadowRoot()
                         .findElement(By.cssSelector(buttonAcceptCookiesSelector)))).click();
-        UtilLogger.logger.info("Click buttonAcceptCookies at SearchPage");
         return this;
     }
 
@@ -58,7 +57,6 @@ public class SearchPage extends AbstractPage {
     public SearchPage typeInputOrigin(String origin) {
         inputOrigin.clear();
         inputOrigin.sendKeys(origin);
-        UtilLogger.logger.info("Type origin station " + origin);
         return this;
     }
 
@@ -66,7 +64,6 @@ public class SearchPage extends AbstractPage {
     public SearchPage typeInputDestination(String destination) {
         inputDestination.clear();
         inputDestination.sendKeys(destination);
-        UtilLogger.logger.info("Type destination station " + destination);
         return this;
     }
 
@@ -74,7 +71,6 @@ public class SearchPage extends AbstractPage {
     public SearchPage typeDate(String date) {
         inputDate.clear();
         inputDate.sendKeys(date);
-        UtilLogger.logger.info("Type date " + date);
         return this;
     }
 
@@ -82,7 +78,6 @@ public class SearchPage extends AbstractPage {
     public SearchPage typeTime(String time) {
         inputTime.clear();
         inputTime.sendKeys(time);
-        UtilLogger.logger.info("Type time " + time);
         return this;
     }
 
@@ -91,12 +86,10 @@ public class SearchPage extends AbstractPage {
         if (departureStatus) {
             if (!radiobuttonDepartureArrival.get(0).isSelected()) {
                 radiobuttonDepartureArrival.get(0).click();
-                UtilLogger.logger.info("Select time by departure time");
             }
         } else {
             if (!radiobuttonDepartureArrival.get(1).isSelected()) {
                 radiobuttonDepartureArrival.get(1).click();
-                UtilLogger.logger.info("Select time by arrival time");
             }
         }
         return this;
@@ -105,7 +98,6 @@ public class SearchPage extends AbstractPage {
     @Step("Submit search route form")
     public SearchResultsPage clickButtonSearch() {
         buttonSearch.click();
-        UtilLogger.logger.info("Click buttonSearch");
         return new SearchResultsPage();
     }
 
