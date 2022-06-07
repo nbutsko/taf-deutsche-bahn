@@ -1,6 +1,6 @@
 package com.bahn.api.entity;
 
-public class Journey {
+public class JourneyRequest {
 
     private String from;
     private String to;
@@ -8,7 +8,7 @@ public class Journey {
     private String time;
     private boolean departureStatus;
 
-    public Journey(String from, String to, String date, String time, boolean departureStatus) {
+    public JourneyRequest(String from, String to, String date, String time, boolean departureStatus) {
         this.from = from;
         this.to = to;
         this.date = date;

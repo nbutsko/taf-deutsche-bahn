@@ -1,6 +1,6 @@
 package com.bahn.api.utils;
 
-import com.bahn.api.entity.Journey;
+import com.bahn.api.entity.JourneyRequest;
 import com.bahn.api.entity.Route;
 import com.bahn.api.entity.Station;
 import com.bahn.logger.UtilLogger;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class JourneyUtils {
 
-    public List<NameValuePair> getJourneyParameters(Journey journey, List<Station> stations) {
+    public List<NameValuePair> getJourneyParameters(JourneyRequest journey, List<Station> stations) {
         List<NameValuePair> params = new ArrayList<>();
         String depStationId = getStationIdByName(stations, journey.getFrom());
         String arrStationId = getStationIdByName(stations, journey.getTo());
@@ -74,7 +74,7 @@ public class JourneyUtils {
     }
 
     @Step("Is response contains {0}")
-    public boolean isResponseContainJourneyStations(Journey journey, String responseBody) {
+    public boolean isResponseContainJourneyStations(JourneyRequest journey, String responseBody) {
         logResponseResults(responseBody);
         getJourneysListAttachment(responseBody);
         boolean isContainFrom = getListJourneys(responseBody).stream()
@@ -84,7 +84,7 @@ public class JourneyUtils {
         return isContainFrom & isContainTo;
     }
 
-    public boolean isTimeInResponseMatchJourneyTime(Journey journey, String responseBody) {
+    public boolean isTimeInResponseMatchJourneyTime(JourneyRequest journey, String responseBody) {
         boolean result = false;
         LocalTime journeyTime = LocalTime.parse(journey.getTime());
         if (journey.isDepartureStatus()) {

@@ -1,6 +1,6 @@
 package com.bahn.api.test;
 
-import com.bahn.api.entity.Journey;
+import com.bahn.api.entity.JourneyRequest;
 import com.bahn.api.entity.Station;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -21,8 +21,8 @@ public class JourneyTest extends AbstractTest {
     @DataProvider(name = "journeys")
     public Object[] setJourneys() {
         return new Object[]{
-                new Journey("Aschaffenburg", "Mannheim", "12.10.2022", "12:00:00", true),
-                new Journey("Wuppertal", "Hamburg-Bergedorf", "20.08.2022", "19:30:00", false)};
+                new JourneyRequest("Aschaffenburg", "Mannheim", "12.10.2022", "12:00:00", true),
+                new JourneyRequest("Wuppertal", "Hamburg-Bergedorf", "20.08.2022", "19:30:00", false)};
     }
 
     @BeforeMethod
@@ -36,7 +36,7 @@ public class JourneyTest extends AbstractTest {
     @Feature("GET Journeys")
     @Story("Smoke")
     @Test(description = "Test API GET journey with parameters", dataProvider = "journeys")
-    public void testGetJourneysRequest(Journey journey) {
+    public void testGetJourneysRequest(JourneyRequest journey) {
         String url = "https://v5.db.transport.rest/journeys";
         List<NameValuePair> params = journeyUtils.getJourneyParameters(journey, stations);
 
