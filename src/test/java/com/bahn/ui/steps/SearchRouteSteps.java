@@ -50,15 +50,15 @@ public class SearchRouteSteps extends SearchPage {
     }
 
     private List<RouteCard> getListOfRouteCards() {
-        String depTimeSelector = "div.timeDep";
-        String arrTimeSelector = "div.timeArr";
+        String depTimeSelector = "div.connectionTimeSoll span.timeDep";
+        String arrTimeSelector = "div.connectionTimeSoll span.timeArr";
         String firstStationSelector = "div.station.first";
         String destinationStationSelector = "div.stationDest";
         String date = searchResultsPage.getDepartureDate();
         List<RouteCard> routeCardList = new ArrayList<>();
         for (WebElement routeCard : searchResultsPage.getSearchResultCards()) {
             String depTime = routeCard.findElement(By.cssSelector(depTimeSelector)).getText();
-            String arrTime = routeCard.findElement(By.cssSelector(arrTimeSelector)).getText().substring(3);
+            String arrTime = routeCard.findElement(By.cssSelector(arrTimeSelector)).getText();
             String firstStation = routeCard.findElement(By.cssSelector(firstStationSelector)).getText();
             String destinationStation = routeCard.findElement(By.cssSelector(destinationStationSelector)).getText();
             routeCardList.add(new RouteCard(firstStation, destinationStation,date, depTime, arrTime));
